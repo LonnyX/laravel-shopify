@@ -35,7 +35,7 @@ trait BillingController
      * @return ViewView
      */
     public function index(
-        ?int $plan = null,
+        $plan = null,
         Request $request,
         ShopQuery $shopQuery,
         GetPlanUrl $getPlanUrl
@@ -43,6 +43,9 @@ trait BillingController
         // Get the shop
         $shop = $shopQuery->getByDomain(ShopDomain::fromNative($request->get('shop')));
 
+        if (!is_numeric($plan)) {
+            $plan = null;
+        }
         // Get the plan URL for redirect
         $url = $getPlanUrl(
             $shop->getId(),
