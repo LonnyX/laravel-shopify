@@ -43,9 +43,12 @@ trait BillingController
         // Get the shop
         $shop = $shopQuery->getByDomain(ShopDomain::fromNative($request->get('shop')));
 
-        if (!is_numeric($plan)) {
+        if ($plan instanceof Request) {
             $plan = null;
+        } else {
+            $plan = (int) $plan;
         }
+
         // Get the plan URL for redirect
         $url = $getPlanUrl(
             $shop->getId(),
