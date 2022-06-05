@@ -39,7 +39,8 @@ class AuthWebhook
 
         if (! $hmac->isSame($hmacLocal) || $shop->isNull()) {
             // Issue with HMAC or missing shop header
-            return Response::make('Invalid webhook signature.', HttpResponse::HTTP_UNAUTHORIZED);
+            return Response::make('Err');
+            //return Response::make('Invalid webhook signature.', HttpResponse::HTTP_UNAUTHORIZED);
         }
 
         // All good, process webhook
